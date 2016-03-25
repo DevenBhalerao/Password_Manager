@@ -54,13 +54,13 @@ public class PasswordGeneration {
 	private void onChange(MouseEvent event) throws Exception{
 
 		String length = PasswordLength.getText();
-		if(length.length() == 0){
-			new AlertBox().display("Length not entered", "You must enter a length!!");
+		if(length.equals("0")){
+			PasswordLength.getStyleClass().add("text-field-error");
 		}
 		else if(!length.matches("[0-9]+")){
-			new AlertBox().display("Length should be a number", "You must enter a number!!");
+			PasswordLength.getStyleClass().add("text-field-error");
 		}
-		else if(Integer.parseInt(length) > 14 ){
+		else if(Integer.parseInt(length) > 14 || Integer.parseInt(length) < 4  ){
 			new AlertBox().display("Invalid Length ", "Length should be less than 14!!");
 		}
 		else{
@@ -104,6 +104,10 @@ public class PasswordGeneration {
 		// TODO Auto-generated method stub
 		if(!Digits.isSelected() && !Special.isSelected() && !UpperCase.isSelected() && !LowerCase.isSelected() ){
 			new AlertBox().display("no choice Selected!"," you must select atleast one choice!!!!!!!!!!");
+			Digits.getStyleClass().add("check-box-error");
+			UpperCase.getStyleClass().add("check-box-error");
+			Special.getStyleClass().add("check-box-error");
+			LowerCase.getStyleClass().add("check-box-error");
 			return false;
 		}else{
 			if(Digits.isSelected())

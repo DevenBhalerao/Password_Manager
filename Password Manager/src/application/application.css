@@ -1,1 +1,17 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.root{
+	-fx-background-color:  #f8f8ff;
+}
+
+.text-field-error {
+  -fx-text-box-border: red ;
+  -fx-focus-color: red ;
+}
+
+.check-box-error {
+	-fx-border-color: red;
+	-fx-focus-color: red ;
+	-fx-border-insets: -5;
+	-fx-border-style: dotted;
+	-fx-border-radius: 5;
+	-fx-border-width: 2;
+}

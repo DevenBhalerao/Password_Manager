@@ -126,7 +126,9 @@ public class HomeScreen implements Initializable {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Password_Generation.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
 		stage.setTitle("Hello World");
-		stage.setScene(new Scene(root, 700, 575));
+		Scene scene = new Scene(root, 700, 575);
+		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+		stage.setScene(scene);
 		stage.show();
 
 	}

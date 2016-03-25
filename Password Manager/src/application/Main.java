@@ -21,7 +21,9 @@ public class Main extends Application {
         HomeScreen controller = fxmlLoader.<HomeScreen>getController();
         controller.setUser(user_id);
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 700, 575));
+        Scene scene = new Scene(root, 700, 575);
+		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
