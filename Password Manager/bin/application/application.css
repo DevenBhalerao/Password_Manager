@@ -10,8 +10,13 @@
 .check-box-error {
 	-fx-border-color: red;
 	-fx-focus-color: red ;
-	-fx-border-insets: -5;
+	-fx-border-insets: -5.0;
 	-fx-border-style: dotted;
-	-fx-border-radius: 5;
-	-fx-border-width: 2;
+	-fx-border-radius: 5.0;
+	-fx-border-width: 2.0;
 }
+
+.label-grid{
+  -fx-border-radius: 10.0 10.0 0.0 0.0;
+  -fx-background-radius: 10.0 10.0 0.0 0.0;
+  }

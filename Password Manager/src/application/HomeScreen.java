@@ -115,7 +115,9 @@ public class HomeScreen implements Initializable {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Password_Analysis.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
 		stage.setTitle("Hello World");
-		stage.setScene(new Scene(root, 700, 575));
+		Scene scene = new Scene(root, 700, 575);
+		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+		stage.setScene(scene);
 		stage.show();
 	}
 
@@ -167,7 +169,6 @@ public class HomeScreen implements Initializable {
 		passwordColumn.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("password"));
 		categoryColumn.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("category"));
 		table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-
 	}
 
 	private ObservableList<UserEntry> getEntries() throws ClassNotFoundException, SQLException {

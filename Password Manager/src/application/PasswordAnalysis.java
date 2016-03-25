@@ -3,6 +3,7 @@ package application;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import org.passay.CharacterRule;
@@ -20,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,6 +30,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -61,7 +64,12 @@ public class PasswordAnalysis implements Initializable {
 	private boolean NumberofCharsisValid;
 	private boolean NumofRepeatedCharisValid;
 	private boolean IllegalSequenceLabelisValid;
+	
+	private HashMap<String,Label> errorMap;
 
+	
+	@FXML
+	private GridPane grid;
 	@FXML
 	private TextField PasswordInput;
 
@@ -110,6 +118,7 @@ public class PasswordAnalysis implements Initializable {
 		isValid = validatePassword();
 		System.out.println("is password valid : " + isValid);
 		checkEachValidation();
+		setLabelColors();
 		System.out.println(score.getPasswordscore());
 	}
 
@@ -126,12 +135,13 @@ public class PasswordAnalysis implements Initializable {
 		for (RuleResultDetail msg : result.getDetails()) {
 			System.out.println(msg.getErrorCode());
 			listofErrors.add(msg.getErrorCode());
+			
+			errorMap.get(msg.getErrorCode());
 		}
 
 		scoreVar = Password.length() * 8;
 
 		if (!isValid) {
-
 			if (listofErrors.contains("TOO_SHORT")) {
 				PWLengthText += "-- TOO SHORT";
 				if (scoreVar > 20)
@@ -279,6 +289,7 @@ public class PasswordAnalysis implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		addTextLimiter(PasswordInput, 14);
+		initializeErrorMap();
 		score = new PasswordScore();
 		addRules();
 		score.setPasswordscore(0);
@@ -289,6 +300,21 @@ public class PasswordAnalysis implements Initializable {
 		});
 		Progress.progressProperty().bind(score.numberProperty());
 
+	}
+
+	private void initializeErrorMap() {
+		// TODO Auto-generated method stub
+		HashMap<Label,String> labelToMsgMap = new HashMap<>();
+		errorMap = new HashMap<>();
+		errorMap.put("TOO_SHORT", value);	
+		errorMap.put("INSUFFICIENT_UPPERCASE", value);
+		errorMap.put("INSUFFICIENT_DIGIT", value);
+		errorMap.put("INSUFFICIENT_SPECIAL", value);
+		errorMap.put("INSUFFICIENT_ALPHABETICAL", value);
+		errorMap.put("ILLEGAL_NUMERICAL_SEQUENCE", value);
+		errorMap.put("ILLEGAL_ALPHABETICAL_SEQUENCE", value);
+		errorMap.put("ILLEGAL_QWERTY_SEQUENCE", value);
+		
 	}
 
 	public static void addTextLimiter(final TextField tf, final int maxLength) {
