@@ -18,15 +18,20 @@ import org.passay.RuleResultDetail;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
-public class PasswordAnalysis implements Initializable{
+public class PasswordAnalysis implements Initializable {
 
 	private String userID;
 	private String Password;
@@ -36,6 +41,8 @@ public class PasswordAnalysis implements Initializable{
 	private double scoreVar;
 	private boolean isValid;
 
+	@FXML
+	private Button backBtn;
 
 	private String PWLengthText = "";
 	private String NumberofNumsText = "";
@@ -46,58 +53,57 @@ public class PasswordAnalysis implements Initializable{
 	private String NumofRepeatedCharText = "";
 	private String IllegalSequenceLabelText = "";
 
-	private boolean PWLengthisValid ;
-	private boolean NumberofNumsisValid ;
-	private boolean NumberofUpperCisValid ;
-	private boolean NumberofLowerCisValid ;
-	private boolean NumberofSymbolsisValid ;
-	private boolean NumberofCharsisValid ;
-	private boolean NumofRepeatedCharisValid ;
-	private boolean IllegalSequenceLabelisValid ;
+	private boolean PWLengthisValid;
+	private boolean NumberofNumsisValid;
+	private boolean NumberofUpperCisValid;
+	private boolean NumberofLowerCisValid;
+	private boolean NumberofSymbolsisValid;
+	private boolean NumberofCharsisValid;
+	private boolean NumofRepeatedCharisValid;
+	private boolean IllegalSequenceLabelisValid;
 
-
-	@FXML 
+	@FXML
 	private TextField PasswordInput;
 
-	@FXML 
+	@FXML
 	private ProgressBar Progress;
 
-	@FXML 
+	@FXML
 	private Label PWComment;
 
-	@FXML 
+	@FXML
 	private Label PWLength;
 
-	@FXML 
+	@FXML
 	private Label NumberofChars;
 
-	@FXML 
+	@FXML
 	private Label NumberofNums;
 
-	@FXML 
+	@FXML
 	private Label NumofUpperC;
 
-	@FXML 
+	@FXML
 	private Label NumofSymbols;
 
-	@FXML 
+	@FXML
 	private Label NumofLowerC;
 
-	@FXML 
+	@FXML
 	private Label NumofRepeatedChar;
 
-	@FXML 
+	@FXML
 	private Label IllegalSequenceLabel;
 
-	@FXML 
+	@FXML
 	private Text PWQualityMetrics;
 
-	@FXML 
+	@FXML
 	private Button button;
 
 	@FXML
-	private void onChange(KeyEvent event){
-		//System.out.println("lol");
+	private void onChange(KeyEvent event) {
+		// System.out.println("lol");
 		Password = PasswordInput.getText();
 		boolean isValidText = checkText(Password);
 		System.out.println(PasswordInput.getText());
@@ -109,7 +115,7 @@ public class PasswordAnalysis implements Initializable{
 
 	private boolean checkText(String password2) {
 		// TODO Auto-generated method stub
-		
+
 		return false;
 	}
 
@@ -117,88 +123,80 @@ public class PasswordAnalysis implements Initializable{
 		// TODO Auto-generated method stub
 		initializeLabels();
 		ArrayList<String> listofErrors = new ArrayList<String>();
-		for(RuleResultDetail msg : result.getDetails()){
+		for (RuleResultDetail msg : result.getDetails()) {
 			System.out.println(msg.getErrorCode());
 			listofErrors.add(msg.getErrorCode());
 		}
 
-		scoreVar = Password.length()*8;
+		scoreVar = Password.length() * 8;
 
-		if(!isValid){
+		if (!isValid) {
 
-			if(listofErrors.contains("TOO_SHORT")){
+			if (listofErrors.contains("TOO_SHORT")) {
 				PWLengthText += "-- TOO SHORT";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				PWLengthisValid = true;
 			}
-			if(listofErrors.contains("INSUFFICIENT_UPPERCASE")){
+			if (listofErrors.contains("INSUFFICIENT_UPPERCASE")) {
 				NumberofUpperCText += "-- uppercase insufficient";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				NumberofUpperCisValid = true;
 			}
-			if(listofErrors.contains("INSUFFICIENT_LOWERCASE")){
+			if (listofErrors.contains("INSUFFICIENT_LOWERCASE")) {
 				NumberofLowerCText += "-- lower case insufficient";
-				if(scoreVar > 20)
-					scoreVar -= 10;  
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				NumberofLowerCisValid = true;
 			}
-			if(listofErrors.contains("INSUFFICIENT_DIGIT")){
+			if (listofErrors.contains("INSUFFICIENT_DIGIT")) {
 				NumberofNumsText += "--insufficient digits";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				NumberofNumsisValid = true;
 			}
-			if(listofErrors.contains("INSUFFICIENT_SPECIAL")){
+			if (listofErrors.contains("INSUFFICIENT_SPECIAL")) {
 				NumberofSymbolsText += "-- insuffcient specials";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				NumberofSymbolsisValid = true;
 			}
-			if(listofErrors.contains("INSUFFICIENT_ALPHABETICAL")){
+			if (listofErrors.contains("INSUFFICIENT_ALPHABETICAL")) {
 				NumberofCharsText += "-- insuffcient characters";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				NumberofCharsisValid = true;
 			}
 
-			if(listofErrors.contains("ILLEGAL_MATCH")){
+			if (listofErrors.contains("ILLEGAL_MATCH")) {
 				NumofRepeatedCharText += "-- repeated charatcers not allowed";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				NumofRepeatedCharisValid = true;
 			}
 
-
-			if(listofErrors.contains("ILLEGAL_NUMERICAL_SEQUENCE") || listofErrors.contains("ILLEGAL_ALPHABETICAL_SEQUENCE") || listofErrors.contains("ILLEGAL_QWERTY_SEQUENCE")){
+			if (listofErrors.contains("ILLEGAL_NUMERICAL_SEQUENCE")
+					|| listofErrors.contains("ILLEGAL_ALPHABETICAL_SEQUENCE")
+					|| listofErrors.contains("ILLEGAL_QWERTY_SEQUENCE")) {
 				IllegalSequenceLabelText += "-- sequence of 3 not allowed";
-				if(scoreVar > 20)
-					scoreVar -= 10; 
-			}
-			else{
+				if (scoreVar > 20)
+					scoreVar -= 10;
+			} else {
 				IllegalSequenceLabelisValid = true;
 			}
-		}
-		else{
+		} else {
 			scoreVar += 20;
 		}
 
-		score.setPasswordscore(scoreVar*0.01);
+		score.setPasswordscore(scoreVar * 0.01);
 
 		PWLength.setText(PWLengthText);
 		NumberofNums.setText(NumberofNumsText);
@@ -223,9 +221,9 @@ public class PasswordAnalysis implements Initializable{
 		NumofRepeatedCharText = "Num of repeated chars";
 		IllegalSequenceLabelText = "Illgal sequence";
 
-		PWLengthisValid = false ;
-		NumberofNumsisValid = false ;
-		NumberofUpperCisValid = false ;
+		PWLengthisValid = false;
+		NumberofNumsisValid = false;
+		NumberofUpperCisValid = false;
 		NumberofLowerCisValid = false;
 		NumberofSymbolsisValid = false;
 		NumberofCharsisValid = false;
@@ -236,7 +234,7 @@ public class PasswordAnalysis implements Initializable{
 	private boolean validatePassword() {
 		// TODO Auto-generated method stub
 		result = validator.validate(new PasswordData(new String(Password)));
-		if(result.isValid())
+		if (result.isValid())
 			return true;
 		return false;
 	}
@@ -258,22 +256,22 @@ public class PasswordAnalysis implements Initializable{
 				// at least one symbol (special character)
 				new CharacterRule(EnglishCharacterData.Special, 2),
 
-				new CharacterRule(EnglishCharacterData.Alphabetical,2),
+				new CharacterRule(EnglishCharacterData.Alphabetical, 2),
 
 				new IllegalRegexRule("(\\w)\\1+"),
 
-				new IllegalSequenceRule(EnglishSequenceData.Alphabetical,3,true),
+				new IllegalSequenceRule(EnglishSequenceData.Alphabetical, 3, true),
 
-				new IllegalSequenceRule(EnglishSequenceData.Numerical,3,true),
+				new IllegalSequenceRule(EnglishSequenceData.Numerical, 3, true),
 
-				new IllegalSequenceRule(EnglishSequenceData.USQwerty,3,true)
+				new IllegalSequenceRule(EnglishSequenceData.USQwerty, 3, true)
 
-				));
+		));
 
 	}
 
-	@FXML 
-	private void pbCheck(ActionEvent event){
+	@FXML
+	private void pbCheck(ActionEvent event) {
 		score.setPasswordscore(score.getPasswordscore() + 0.1);
 	}
 
@@ -284,38 +282,41 @@ public class PasswordAnalysis implements Initializable{
 		score = new PasswordScore();
 		addRules();
 		score.setPasswordscore(0);
-		score.numberProperty().addListener((v,oldValue,newValue) -> {
+		score.numberProperty().addListener((v, oldValue, newValue) -> {
 			System.out.println(oldValue);
 			System.out.println(newValue);
 
 		});
 		Progress.progressProperty().bind(score.numberProperty());
 
+	}
+
+	public static void addTextLimiter(final TextField tf, final int maxLength) {
+		tf.textProperty().addListener((ov, oldValue, newValue) -> {
+			if (tf.getText().length() > maxLength) {
+				String s = tf.getText().substring(0, maxLength);
+				tf.setText(s);
+			}
+
+		});
 
 	}
-	
-	public static void addTextLimiter(final TextField tf, final int maxLength) {
-		tf.textProperty().addListener((ov,oldValue,newValue) -> {
-			if (tf.getText().length() > maxLength) {
-                String s = tf.getText().substring(0, maxLength);
-                tf.setText(s);
-            }
-			
-		});
-		
-	}
-	
-	
+
 	public void setUser(String user_id) {
 		// TODO Auto-generated method stub
 		this.userID = user_id;
 	}
-	
-	
 
-
-
-
-
+	@FXML
+	private void onBackBtnClick(MouseEvent event) throws Exception {
+		Stage stage = (Stage) PWQualityMetrics.getScene().getWindow();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home_Screen.fxml"));
+		Parent root = (Parent) fxmlLoader.load();
+		HomeScreen controller = fxmlLoader.<HomeScreen> getController();
+		controller.setUser(userID);
+		stage.setTitle("Hello World");
+		stage.setScene(new Scene(root, 700, 575));
+		stage.show();
+	}
 
 }

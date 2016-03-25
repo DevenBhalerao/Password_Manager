@@ -7,10 +7,14 @@ import org.passay.EnglishCharacterData;
 import org.passay.PasswordGenerator;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 public class PasswordGeneration {
 	
@@ -39,6 +43,9 @@ public class PasswordGeneration {
 
 	@FXML 
 	private Button generatePassword;
+	
+	@FXML 
+	private Button backBtn;
 
 	@FXML 
 	private TextField PasswordLength;
@@ -53,7 +60,7 @@ public class PasswordGeneration {
 		else if(!length.matches("[0-9]+")){
 			new AlertBox().display("Length should be a number", "You must enter a number!!");
 		}
-		else if(Integer.parseInt(length) >14 ){
+		else if(Integer.parseInt(length) > 14 ){
 			new AlertBox().display("Invalid Length ", "Length should be less than 14!!");
 		}
 		else{
@@ -115,5 +122,18 @@ public class PasswordGeneration {
 		// TODO Auto-generated method stub
 		this.userID = user_id;
 	}
+	
+	@FXML
+	private void onBackBtnClick(MouseEvent event) throws Exception{
+		Stage stage = (Stage) Digits.getScene().getWindow();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home_Screen.fxml")); 
+        Parent root = (Parent)fxmlLoader.load(); 
+        HomeScreen controller = fxmlLoader.<HomeScreen>getController();
+        controller.setUser(userID);
+        stage.setTitle("Hello World");
+		stage.setScene(new Scene(root, 700, 575));
+		stage.show();
+	}
+
 
 }

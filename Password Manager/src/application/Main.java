@@ -16,9 +16,9 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
     	String user_id = "1";
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Password_Generation.fxml")); 
+    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home_Screen.fxml")); 
         Parent root = (Parent)fxmlLoader.load(); 
-        PasswordGeneration controller = fxmlLoader.<PasswordGeneration>getController();
+        HomeScreen controller = fxmlLoader.<HomeScreen>getController();
         controller.setUser(user_id);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 700, 575));
