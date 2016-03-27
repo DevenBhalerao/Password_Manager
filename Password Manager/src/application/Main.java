@@ -1,30 +1,28 @@
 package application;
 	
+import java.io.IOException;
+
 import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 
 public class Main extends Application {
-	public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-    	String user_id = "1";
-    	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home_Screen.fxml")); 
+	@Override
+	public void start(Stage primaryStage) throws IOException {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml")); 
         Parent root = (Parent)fxmlLoader.load(); 
-        HomeScreen controller = fxmlLoader.<HomeScreen>getController();
-        controller.setUser(user_id);
+        Login controller = fxmlLoader.<Login>getController();
         primaryStage.setTitle("Hello World");
-        Scene scene = new Scene(root, 700, 575);
+        Scene scene = new Scene(root, 600, 575);
 		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 }

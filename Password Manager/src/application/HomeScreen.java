@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
@@ -21,7 +22,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class HomeScreen implements Initializable {
+public class HomeScreen {
 
 	private String UserID;
 	private Home_Dialog_Box dialogBox;
@@ -72,6 +73,7 @@ public class HomeScreen implements Initializable {
 
 	@FXML
 	private Button LogOutBT;
+	private String masterPassword;
 
 	@FXML
 	private void onAddEntry(MouseEvent event) throws Exception {
@@ -79,16 +81,20 @@ public class HomeScreen implements Initializable {
 		dialogBox.display("add");
 		constructEntryTable();
 		table.setItems(getEntries());
+
+		
 	}
 
 	@FXML
 	private void onDeleteEntry(MouseEvent event) throws Exception {
 		// System.out.println("lol");
 		ObservableList<UserEntry> selectedItems = getSelectedItems();
+		System.out.println(selectedItems);
 		dialogBox.setSelectedItems(selectedItems);
 		dialogBox.display("delete");
 		constructEntryTable();
 		table.setItems(getEntries());
+		
 	}
 
 	private ObservableList<UserEntry> getSelectedItems() {
@@ -114,6 +120,8 @@ public class HomeScreen implements Initializable {
 		Stage stage = (Stage) borderPane.getScene().getWindow();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Password_Analysis.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
+		PasswordAnalysis controller = fxmlLoader.<PasswordAnalysis>getController();
+        controller.setUser(UserID,masterPassword);
 		stage.setTitle("Hello World");
 		Scene scene = new Scene(root, 700, 575);
 		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
@@ -125,14 +133,46 @@ public class HomeScreen implements Initializable {
 	private void onPWGenerationClick(MouseEvent event) throws Exception {
 		// System.out.println("lol");
 		Stage stage = (Stage) borderPane.getScene().getWindow();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Password_Generation.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Password_Generator.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
+		PasswordGeneration controller = fxmlLoader.<PasswordGeneration>getController();
+        controller.setUser(UserID,masterPassword);
 		stage.setTitle("Hello World");
 		Scene scene = new Scene(root, 700, 575);
 		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
 		stage.setScene(scene);
 		stage.show();
 
+	}
+	
+	
+	@FXML
+	private void onSNotesClick(MouseEvent event) throws Exception {
+		// System.out.println("lol");
+		Stage stage = (Stage) borderPane.getScene().getWindow();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Secure_Notes.fxml"));
+		Parent root = (Parent) fxmlLoader.load();
+		SecureNotes controller = fxmlLoader.<SecureNotes>getController();
+		controller.setUser(UserID,masterPassword);
+		stage.setTitle("Hello World");
+		Scene scene = new Scene(root, 700, 575);
+		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.show();
+
+	}
+	
+	@FXML
+	private void onLogOutClick(MouseEvent event) throws Exception {
+		// System.out.println("lol");
+		Stage stage = (Stage) borderPane.getScene().getWindow();
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Login.fxml"));
+		Parent root = (Parent) fxmlLoader.load();
+		stage.setTitle("Hello World");
+		Scene scene = new Scene(root, 700, 575);
+		scene.getStylesheets().add(Main.class.getResource("application.css").toExternalForm());
+		stage.setScene(scene);
+		stage.show();
 	}
 
 	@FXML
@@ -150,35 +190,42 @@ public class HomeScreen implements Initializable {
 		return userEntries;
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		try {
-			constructEntryTable();
-			table.setItems(getEntries());
-
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	private void constructEntryTable() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
+		System.out.println("lol");
 		accountColumn.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("account_name"));
 		loginColumn.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("login_id"));
 		passwordColumn.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("password"));
 		categoryColumn.setCellValueFactory(new PropertyValueFactory<UserEntry, String>("category"));
 		table.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+		table.setItems(getEntries());
 	}
 
 	private ObservableList<UserEntry> getEntries() throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
+		
+		try{
+		System.out.println(new Account(UserID).getEntries());
 		ObservableList<UserEntry> userEntries = FXCollections.observableArrayList(new Account(UserID).getEntries());
 		return userEntries;
+		}
+		catch(Exception e){
+			
+		}
+		return null;
 	}
 
-	public void setUser(String userid) {
+	public void setUser(String userid, String masterPassword) {
+		// TODO Auto-generated method stub
 		this.UserID = userid;
+		this.masterPassword = masterPassword;
+		System.out.println(UserID);
 		dialogBox = new Home_Dialog_Box(UserID);
+		try {
+			constructEntryTable();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

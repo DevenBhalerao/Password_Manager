@@ -1,0 +1,52 @@
+Colour 2: #d6ae7b
+
+Colour 2: #64b3f4
+
+Colour 2: #757519
+
+Colour 2: #ffdde1
+
+#3d72b4
+
+#135058
+
+#D1913C
+
+#eef2f3
+
+#ffffff
+
+#abbaab
+
+
+
+
+DARK
+
+Colour 2: #1F1C18
+
+BDC3C6
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+background #deeaf7
+
+radius 10
+
+border color #00c6ff
+

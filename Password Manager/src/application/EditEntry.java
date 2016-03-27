@@ -3,6 +3,7 @@ package application;
 import java.sql.SQLException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -56,6 +57,13 @@ public class EditEntry{
 		if (password.equals(confirmedPW)) {
 			Account account = new Account(userID);
 			account.editEntry(accountName, category, password, loginID, entryID);
+			Alert alert= new Alert(Alert.AlertType.INFORMATION);
+			alert.setContentText("Successfully Edited");
+			alert.showAndWait();
+		}else{
+			Alert alert= new Alert(Alert.AlertType.INFORMATION);
+			alert.setContentText("Passwords do not match");
+			alert.showAndWait();
 		}
 
 	}

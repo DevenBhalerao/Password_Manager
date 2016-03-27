@@ -3,6 +3,7 @@ package application;
 import java.sql.SQLException;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -44,6 +45,9 @@ public class AddEntry {
 		if(password.equals(confirmedPW)){
 			Account account = new Account(UserID);
 			account.AddEntry(accountName, category, password, loginID);
+			Alert alert= new Alert(Alert.AlertType.INFORMATION);
+			alert.setContentText("Successfully Added");
+			alert.showAndWait();
 		}
 		
 	}
