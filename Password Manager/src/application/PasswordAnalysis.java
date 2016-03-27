@@ -134,51 +134,51 @@ public class PasswordAnalysis implements Initializable{
 
 		if (!isValid) {
 			if (listofErrors.contains("TOO_SHORT")) {
-				PWLengthText += "no";
+				PWLengthText += " No";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				PWLengthText += "yes";
+				PWLengthText += " Yes";
 				PWLengthisValid = true;
 			}
 			if (listofErrors.contains("INSUFFICIENT_UPPERCASE")) {
-				NumberofUpperCText += "no";
+				NumberofUpperCText += " No";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				NumberofUpperCText += "yes";
+				NumberofUpperCText += " Yes";
 				NumberofUpperCisValid = true;
 			}
 			if (listofErrors.contains("INSUFFICIENT_LOWERCASE")) {
-				NumberofLowerCText += "no";
+				NumberofLowerCText += " No";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				NumberofLowerCText += "yes";
+				NumberofLowerCText += " Yes";
 				NumberofLowerCisValid = true;
 			}
 			if (listofErrors.contains("INSUFFICIENT_DIGIT")) {
-				NumberofNumsText += "no";
+				NumberofNumsText += " No";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				NumberofNumsText += "yes";
+				NumberofNumsText += " Yes";
 				NumberofNumsisValid = true;
 			}
 			if (listofErrors.contains("INSUFFICIENT_SPECIAL")) {
-				NumberofSymbolsText += "no";
+				NumberofSymbolsText += " No";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				NumberofSymbolsText += "yes";
+				NumberofSymbolsText += " Yes";
 				NumberofSymbolsisValid = true;
 			}
 			if (listofErrors.contains("INSUFFICIENT_ALPHABETICAL")) {
-				NumberofCharsText += "no";
+				NumberofCharsText += " No";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				NumberofCharsText += "yes";
+				NumberofCharsText += " Yes";
 				NumberofCharsisValid = true;
 			}
 
@@ -187,18 +187,18 @@ public class PasswordAnalysis implements Initializable{
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				NumofRepeatedCharText += "no";
+				NumofRepeatedCharText += " No";
 				NumofRepeatedCharisValid = true;
 			}
 
 			if (listofErrors.contains("ILLEGAL_NUMERICAL_SEQUENCE")
 					|| listofErrors.contains("ILLEGAL_ALPHABETICAL_SEQUENCE")
 					|| listofErrors.contains("ILLEGAL_QWERTY_SEQUENCE")) {
-				IllegalSequenceLabelText += "yes";
+				IllegalSequenceLabelText += " Yes";
 				if (scoreVar > 20)
 					scoreVar -= 10;
 			} else {
-				IllegalSequenceLabelText += "no";
+				IllegalSequenceLabelText += " No";
 				IllegalSequenceLabelisValid = true;
 			}
 		} else {
