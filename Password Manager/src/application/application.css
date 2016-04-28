@@ -1,5 +1,5 @@
 .root{
-	-fx-background-color:  #f8f8ff;
+	-fx-background-color:  #edf5f8;
 }
 
 .text-field-error {
@@ -16,7 +16,80 @@
 	-fx-border-width: 2.0;
 }
 
-.label-grid{
-  -fx-border-radius: 10.0 10.0 0.0 0.0;
-  -fx-background-radius: 10.0 10.0 0.0 0.0;
+.label{
+  -fx-border-radius: 10.0 10.0 10.0 10.0;
+  -fx-background-radius: 10.0 10.0 10.0 10.0;
   }
+  
+ .errorLabel{
+ 	-fx-background-color: #F75D59;
+ }
+ 
+ .validLabel{
+ 	-fx-background-color: #CCFB5D;
+ }
+ 
+ .weak-password-progressbar{
+ 	-fx-accent: red;
+ }
+
+ .strong-password-progressbar{
+ 	-fx-accent: green;
+ }
+ .average-password-progressbar{
+ 	-fx-accent: orange;
+ }
+ 
+ .rich-blue-button {
+    -fx-background-color: 
+        #000000,
+        linear-gradient(#7ebcea, #2f4b8f),
+        linear-gradient(#426ab7, #263e75),
+        linear-gradient(#395cab, #223768);
+    -fx-background-insets: 0.0,1.0,2.0,3.0;
+    -fx-background-radius: 3.0,2.0,2.0,2.0;
+    -fx-padding: 6.0 24.0 6.0 24.0;
+    -fx-text-fill: white;
+    -fx-font-size: 14.0px;
+    
+}
+.rich-blue-button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0.0,0.0,0.0,0.8) , 0.0, 0.0 , 0.0 , 1.0);
+}
+
+.rich-blue-button:hover {
+	 -fx-background-color: 
+        #000000,
+        linear-gradient(#bddcf4, #5273c7),
+        linear-gradient(#426ab7, #698bc9),
+        linear-gradient(#6685cc, #32519a);
+}
+
+.sidebar-button {
+	-fx-background-radius: 0.0,0.0,0.0,0.0;
+	-fx-border-color: transparent ;
+	-fx-background-color: #edf5f8;
+}
+
+.sidebar-button:hover {
+	-fx-background-color: #426ab7 ;
+	-fx-text-fill: white;
+}
+
+.table-view {
+  -fx-table-cell-border-color: transparent;
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

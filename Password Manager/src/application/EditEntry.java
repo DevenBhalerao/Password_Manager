@@ -11,18 +11,18 @@ import javafx.scene.input.MouseEvent;
 
 public class EditEntry{
 
-	private String userID;
 	private String entryID;
 	private ObservableList<UserEntry> selectedItems;
 	private UserEntry selectedEntry;
+	private Account account;
 
 	public EditEntry() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public EditEntry(String userID) {
+	public EditEntry(Account account) {
 		// TODO Auto-generated constructor stub
-		this.userID = userID;
+		this.account = account;
 	}
 
 	@FXML
@@ -55,7 +55,6 @@ public class EditEntry{
 		String loginID = loginIDField.getText();
 		
 		if (password.equals(confirmedPW)) {
-			Account account = new Account(userID);
 			account.editEntry(accountName, category, password, loginID, entryID);
 			Alert alert= new Alert(Alert.AlertType.INFORMATION);
 			alert.setContentText("Successfully Edited");
@@ -76,13 +75,13 @@ public class EditEntry{
 		}
 	}
 
-	public void setUser(String userid) {
-		this.userID = userid;
+	public void setUser(Account account) {
+		this.account = account;
 
 	}
 
 	public void setSelectedItems(ObservableList<UserEntry> selectedItems) {
-		System.out.println(selectedItems);
+		//System.out.println(selectedItems);
 		this.selectedItems = selectedItems;
 	}
 	

@@ -34,6 +34,8 @@ public class AddEntry {
 	@FXML
 	private TextField loginIDField;
 	
+	private Account account;
+	
 	@FXML
 	private void onAddEntryBTN(MouseEvent event) throws ClassNotFoundException, SQLException{
 		String accountName = accountNameField.getText();
@@ -43,7 +45,6 @@ public class AddEntry {
 		String loginID = loginIDField.getText();
 
 		if(password.equals(confirmedPW)){
-			Account account = new Account(UserID);
 			account.AddEntry(accountName, category, password, loginID);
 			Alert alert= new Alert(Alert.AlertType.INFORMATION);
 			alert.setContentText("Successfully Added");
@@ -52,8 +53,8 @@ public class AddEntry {
 		
 	}
 	
-	public void setUser(String userid){
-		this.UserID = userid;
+	public void setUser(Account account){
+		this.account = account;
 		
 	}
 	

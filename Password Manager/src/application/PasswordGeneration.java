@@ -50,6 +50,7 @@ public class PasswordGeneration {
 
 	@FXML 
 	private TextField PasswordLength;
+	private Account account;
 
 	@FXML
 	private void onChange(MouseEvent event) throws Exception{
@@ -135,10 +136,9 @@ public class PasswordGeneration {
 		}
 	}
 
-	public void setUser(String userid, String masterPassword) {
+	public void setUser(Account account) {
 		// TODO Auto-generated method stub
-		this.userID = userid;
-		this.masterPassword = masterPassword;
+		this.account = account;
 	}
 	
 	@FXML
@@ -147,7 +147,7 @@ public class PasswordGeneration {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Home_Screen.fxml"));
 		Parent root = (Parent) fxmlLoader.load();
 		HomeScreen controller = fxmlLoader.<HomeScreen> getController();
-		controller.setUser(userID,masterPassword);
+		controller.setUser(account);
 		stage.setTitle("Hello World");
 		stage.setScene(new Scene(root, 700, 575));
 		stage.show();

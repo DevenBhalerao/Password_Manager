@@ -12,7 +12,6 @@
             <Button mnemonicParsing="false" onMouseClicked="#onSave" text="Save" />
             <Button mnemonicParsing="false" onMouseClicked="#onSaveAs" text="Save As" />
             <Button mnemonicParsing="false" onMouseClicked="#onOpen" text="Load" />
-            <Button mnemonicParsing="false" text="Button" />
          </children>
       </HBox>
    </top>

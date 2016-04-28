@@ -84,20 +84,14 @@ public class AES
         try
         {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
-        
             cipher.init(Cipher.ENCRYPT_MODE, secretKey);
-        
-         
             setEncryptedString(Base64.encodeBase64String(cipher.doFinal(strToEncrypt.getBytes("UTF-8"))));
-        
         }
         catch (Exception e)
         {
-           
             System.out.println("Error while encrypting: "+e.toString());
         }
         return null;
-
     }
 
     public static String decrypt(String strToDecrypt)
@@ -112,8 +106,9 @@ public class AES
         }
         catch (Exception e)
         {
-         
+        	
             System.out.println("Error while decrypting: "+e.toString());
+            return e.toString();
 
         }
         return null;
